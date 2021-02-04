@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "SpaceXLaunch"
+    }
+  },
+  "defaultProject": "SpaceXLaunch",
+  "cli": {
+    "analytics": "1100b1bf-23d6-4d00-b24f-6882f85a8c30"
+  }
 }

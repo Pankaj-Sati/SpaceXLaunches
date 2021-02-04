@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+:root
+{
+    font-size: 14px;
+    --text_1:1rem;
+    --text_sm:0.8rem;
+    --text_md:1.1rem;
+    --text_lg:1.2rem;
+
+    --textColor:black;
+    --primaryColor:rgb(197, 224, 157);
+    --primaryColorDark:rgb(124, 185, 2);
+    --secondaryColor:rgb(56,65,131);
+    --backgroundColor:#efefef;
+
+    font-family: 'arial',monospace;
+}
+
+
+/*U.I. Components*/
+
+body
+{
+    background-color: var(--backgroundColor);
+    margin:0px;
+    padding:5px 20px;
+}
+
+button
+{
+    border-radius:5px;
+    font-size: var(--text_1);
+    color:var(--textColor);
+    box-shadow: none;
+    border:none;
+    padding:5px 15px;
+    cursor: pointer;
+    background-color: var(--primaryColor);
+}
+
+.selected
+{
+    background-color: var(--primaryColorDark);
+}
+
+h6
+{
+    font-size: var(--text_1);
+}
+
+h5
+{
+    font-size: var(--text_md);
+}
+
+h2
+{
+    font-size: var(--text_lg);
+}

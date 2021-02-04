@@ -1,0 +1,63 @@
+<div class="container">
+
+    <header>
+        <h1>SpaceX Launch Programs</h1>
+    </header>
+    
+    <div class="contentContainer">    
+        <div class="filters card">
+            <h5>Filters</h5>
+            <div class="filtersBody">
+                <h6>Launch Year</h6>
+                <hr>
+                <div class="launchYears filter" (click)="setYearFilter($event)">
+                   <button type="button"  *ngFor="let yearItem of launchYears" name="{{yearItem}}" [class.selected]="filterLaunchYear==yearItem"> {{yearItem}}</button>
+                </div>
+    
+                <h6>Successful Launch</h6>
+                <hr>
+                <div class="launchSuccess filter">
+                  <button type="button" (click)="setSuccessLaunchFilter(true)" [class.selected]="filterSuccessfulLaunch===true">True</button>
+                  <button type="button" (click)="setSuccessLaunchFilter(false)" [class.selected]="filterSuccessfulLaunch===false">False</button>
+                </div>
+    
+                <h6>Successful Landing</h6>
+                <hr>
+                <div class="landSuccess filter">
+                    <button type="button" (click)="setSuccessLandingFilter(true)" [class.selected]="filterSuccessfulLanding===true">True</button>
+                    <button type="button" (click)="setSuccessLandingFilter(false)" [class.selected]="filterSuccessfulLanding===false">False</button>
+            
+                </div>
+    
+    
+            </div>
+            
+        </div>
+        <div class="launchItemsBody">
+            <div class="launchitem card" *ngFor="let item of launchItems;let i=index;">
+                    <picture>
+                        <source media="(min-width:700px)" [srcset]="item.images.large">
+                        <img class="image lazyLoad" [attr.data-src]="item.images.large" [src]="i<10?item.images.small:''" [alt]="item.mission_name+' Image'">
+                    </picture>
+    
+                    <p class="cardTitle">{{item.mission_name}} #{{item.flight_number}}</p>
+                    <div class="cardContent">
+                        <p><span class="key">Mission Ids:</span><span class="value"><span class='ids' *ngFor="let id of item.mission_id;let isLast=isLast;let isFirst=isFirst">{{id}}</span></span></p>
+                        <p><span class="key">Launch Year:</span><span class="value">{{item.launch_year}}</span></p>
+                        <p><span class="key">Successful Launch:</span><span class="value">{{item.launch_success}}</span></p>
+                        <p><span class="key">Successful Landing:</span><span class="value">{{item.land_success}}</span></p>
+                    </div>
+    
+            </div>
+    
+            
+          
+    
+        </div>
+    </div>
+    
+    <footer>Developed By Pankaj Sati</footer>
+
+</div>
+
+
