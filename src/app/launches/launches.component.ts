@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SpaceXProgram } from "../model/program.data";
-
+import { ApiCallService } from "../services/api-call.service";
 @Component(
     {
         styleUrls:['./launches.styles.scss'],
@@ -16,7 +16,7 @@ import { SpaceXProgram } from "../model/program.data";
         filterLaunchYear:number=null; //For filtering by year
         launchYears:number[]=[];
 
-        constructor()
+        constructor(private apiService:ApiCallService)
         {
             for(let i=0;i<100;i++)
             {
@@ -40,7 +40,7 @@ import { SpaceXProgram } from "../model/program.data";
         }
 
         ngOnInit(): void {
-             
+             this.getLaunchItems();
         }
 
         ngAfterContentInit()
@@ -93,6 +93,7 @@ import { SpaceXProgram } from "../model/program.data";
                     this.filterLaunchYear=selectedYear;
                 }
             }
+            this.getLaunchItems();
         }
 
         setSuccessLaunchFilter(value)
@@ -107,6 +108,7 @@ import { SpaceXProgram } from "../model/program.data";
             {
                 this.filterSuccessfulLaunch=Boolean(value)
             }
+            this.getLaunchItems();
         }
 
         setSuccessLandingFilter(value)
@@ -121,6 +123,25 @@ import { SpaceXProgram } from "../model/program.data";
             {
                 this.filterSuccessfulLanding=Boolean(value)
             }
+            this.getLaunchItems();
+        }
+
+        getLaunchItems()
+        {
+            let params=
+            {
+                limit:100,
+                launch_success:this.filterSuccessfulLaunch??'',
+                land_success:this.filterSuccessfulLanding??'',
+                launch_year:this.filterLaunchYear??''
+            }
+            this.apiService.getLaunches(params).subscribe(data=>
+                {
+                    console.log(data);
+                },error=>
+                {
+                    console.log(error);
+                });
         }
 
 
