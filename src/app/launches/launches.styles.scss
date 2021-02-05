@@ -17,6 +17,7 @@ $commonSeperationUnits:20px; //For comon gaps, margin and padding of sections
     display: grid;
     gap: $commonSeperationUnits;
     justify-items: stretch;
+    align-items: self-start;
 }
 
 .pageTitle
@@ -35,7 +36,7 @@ h5
 {
     padding: $commonSeperationUnits;
     background-color: white;
-    min-width: 200px;;
+    width: 240px;
     min-height: 400px;
     box-shadow: 1px 2px 5px #afafaf;
     border-radius: 10px;
@@ -92,11 +93,17 @@ h5
 
 .launchitem{
 
+    .imageContainer
+    {
+        background-color: var(--backgroundColor);
+        width:100%;
+        text-align: center;
+    }
     img
     {
-        width: 100%;
-        background-color: var(--backgroundColor);
-        object-fit: contain;
+        width:220px;
+        height:220px;
+        max-width: 100%;
     }
 
     .cardTitle
@@ -110,19 +117,15 @@ h5
     .cardContent
     {
         font-size: var(--text_1);
+        color:var(--secondaryColor);    
+        margin-left:10px;  
+        word-break: break-word;
         .key
         {
             color:var(--textColor);   
             font-weight: 700;   
         }
-
-        .value
-        {
-            color:var(--secondaryColor);    
-            margin-left:10px;  
-            word-break: break-word;
-        }
-
+       
         .ids:not(:last-child)::after
         {
             content: ",";

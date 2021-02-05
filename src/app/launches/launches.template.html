@@ -35,17 +35,20 @@
         </div>
         <div class="launchItemsBody">
             <div class="launchitem card" *ngFor="let item of launchItems;let i=index;">
+                <div class="imageContainer">
                     <picture>
                         <source media="(min-width:700px)" [srcset]="item.images.large">
                         <img class="image lazyLoad" [attr.data-src]="item.images.large" [src]="i<10?item.images.small:''" [alt]="item.mission_name+' Image'">
                     </picture>
+                </div>
+                   
     
                     <p class="cardTitle">{{item.mission_name}} #{{item.flight_number}}</p>
                     <div class="cardContent">
-                        <p><span class="key">Mission Ids:</span><span class="value"><span class='ids' *ngFor="let id of item.mission_id;">{{id}}</span><span *ngIf="item.mission_id.length==0">Not Available</span></span></p>
-                        <p><span class="key">Launch Year:</span><span class="value">{{item.launch_year}}</span></p>
-                        <p><span class="key">Successful Launch:</span><span class="value">{{item.launch_success}}</span></p>
-                        <p><span class="key">Successful Landing:</span><span class="value">{{item.land_success}}</span></p>
+                        <p><span class="key">Mission Ids:</span><span class='ids' *ngFor="let id of item.mission_id;">{{id}}</span><span *ngIf="item.mission_id.length==0">Not Available</span></p>
+                        <p><span class="key">Launch Year:</span>{{item.launch_year}}</p>
+                        <p><span class="key">Successful Launch:</span>{{item.launch_success}}</p>
+                        <p><span class="key">Successful Landing:</span>{{item.land_success}}</p>
                     </div>
     
             </div>

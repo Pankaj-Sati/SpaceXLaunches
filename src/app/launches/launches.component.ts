@@ -125,8 +125,9 @@ import { AppSettingsService } from "../services/app-settings.service";
                 {
                     this.filters.launch_year=selectedYear;
                 }
+                this.getLaunchItems();
             }
-            this.getLaunchItems();
+            
         }
 
         setSuccessLaunchFilter(value)
