@@ -26,7 +26,7 @@ import { AppSettingsService } from "../services/app-settings.service";
         constructor(private apiService:ApiCallService,
             @Inject(PLATFORM_ID) platformId:string,
             private activatedRoute:ActivatedRoute,
-            private appSettings:AppSettingsService,
+            public appSettings:AppSettingsService,
             private location:Location,
             private router:Router)
         {
