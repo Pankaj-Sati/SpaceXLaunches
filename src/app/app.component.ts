@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AppSettingsService } from './services/app-settings.service';
 
@@ -10,9 +11,9 @@ import { AppSettingsService } from './services/app-settings.service';
 export class AppComponent {
   title = 'SpaceXLaunch';
 
-  constructor(public appSettings:AppSettingsService)
+  constructor(public appSettings:AppSettingsService,@Inject(PLATFORM_ID) platformId:string)
   {
-    if(environment.production && window)
+    if(environment.production && isPlatformBrowser(platformId))
     {
       window.console.log=()=>{}; //Disabling console log on production
     }
