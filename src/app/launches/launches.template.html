@@ -38,7 +38,7 @@
                 <div class="imageContainer">
                     <picture>
                         <source media="(min-width:700px)" [srcset]="item.images.large">
-                        <img class="image lazyLoad" [attr.data-src]="item.images.large" [src]="i<10?item.images.small:''" [alt]="item.mission_name+' Image'">
+                        <img class="image lazyLoad" [attr.data-src]="item.images.small" [src]="i<10?item.images.small:''" [alt]="item.mission_name+' Image'">
                     </picture>
                 </div>
                    
