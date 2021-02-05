@@ -12,6 +12,7 @@
     "serve:ssr": "node dist/SpaceXLaunch/server/main.js",
     "build:ssr": "ng build --prod && ng run SpaceXLaunch:server:production",
     "prerender": "ng run SpaceXLaunch:prerender",
+    "start:heroku":"node dist/server",
     "postinstall":"npm run build:ssr" 
   },
   "private": true,
