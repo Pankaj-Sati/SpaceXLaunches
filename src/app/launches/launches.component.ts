@@ -1,8 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { isPlatformBrowser, Location } from "@angular/common";
+import { Component, Inject, Injectable, OnInit, PLATFORM_ID } from "@angular/core";
+import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
 import { SpaceXProgram } from "../model/program.data";
 import { ApiCallService } from "../services/api-call.service";
+import { AppSettingsService } from "../services/app-settings.service";
 @Component(
     {
+        selector:'launches',
         styleUrls:['./launches.styles.scss'],
         templateUrl:'./launches.template.html'
     })
@@ -10,51 +14,79 @@ import { ApiCallService } from "../services/api-call.service";
     {
 
         launchItems:SpaceXProgram[]=[];
-        
-        filterSuccessfulLaunch:boolean=null; //For filtering successful launches
-        filterSuccessfulLanding:boolean=null; //For filtering successful landings
-        filterLaunchYear:number=null; //For filtering by year
-        launchYears:number[]=[];
-
-        constructor(private apiService:ApiCallService)
-        {
-            for(let i=0;i<100;i++)
+        filters=
             {
-                let obj=new SpaceXProgram();
-                obj.flight_number=String(i);
-                obj.land_success=String(i%3==0);
-                obj.launch_success=String(i%2==0);
-                obj.launch_year=String(2021);
-                obj.mission_id=["1","2","3","4","5","6","1","2","3","4","5","6","1","2","3","4","5","6","1","2","3","4","5","6","1","2","3","4","5","6","1","2","3","4","5","6","1","2","3","4","5","6","1","2","3","4","5","6"];
-                obj.mission_name="Mission "+i;
-                obj.images.small=i%2==0?"https://images2.imgbox.com/89/54/61VCHZwd_o.png":"https://images2.imgbox.com/f1/4a/WAkSmKfY_o.png";
-                obj.images.large=i%2==0?"https://images2.imgbox.com/08/a2/bPpNeIRJ_o.png":"https://images2.imgbox.com/a0/ab/XUoByiuR_o.png";
-                this.launchItems.push(obj);
+                limit:100,
+                launch_success:'',
+                land_success:'',
+                launch_year:''
             }
-
+        launchYears:number[]=[];
+        isPlatformBrowser=false;
+        constructor(private apiService:ApiCallService,
+            @Inject(PLATFORM_ID) platformId:string,
+            private activatedRoute:ActivatedRoute,
+            private appSettings:AppSettingsService,
+            private location:Location,
+            private router:Router)
+        {
+            this.isPlatformBrowser=isPlatformBrowser(platformId);
+            
             //Adding static year filters
             for(let i=2006;i<=2020;i++)
             {
                 this.launchYears.push(i);
             }
+
+            this.router.events.subscribe(event=>
+                {
+                    if(event instanceof NavigationEnd)
+                    {
+                        
+
+                            if(this.isPlatformBrowser)
+                            {
+                                console.log('Navigation End event triggered',this.router.parseUrl(this.router.url).queryParams);
+                                const queryParams=Object.assign({},this.router.parseUrl(this.router.url).queryParams);
+                                Object.keys(queryParams).forEach(param=>
+                                    {
+                                        if(this.filters[param]!=undefined)
+                                        {
+                                            this.filters[param]=queryParams[param];
+                                        }
+                                    });
+                                this.getLaunchItems();
+                            }
+                        
+                    }
+                })
+
         }
 
         ngOnInit(): void {
-             this.getLaunchItems();
+            //  this.getLaunchItems();
+
+            this.activatedRoute.queryParams.subscribe(data=>
+                {
+                    console.log('Query Parameter changed',data);
+                });     
         }
 
         ngAfterContentInit()
         {
+           if(this.isPlatformBrowser)
+           {
             console.log("In ngAfterContentInit");
             document.addEventListener('scroll',this.lazyLoadImages);
             document.addEventListener('resize',this.lazyLoadImages);
             document.addEventListener('orientationChange',this.lazyLoadImages);
+           } 
 
         }
 
         lazyLoadImages()
         {
-           
+           debugger
             let imgTags=document.getElementsByClassName('lazyLoad');
             let windowScrollPosition=window.pageYOffset;   
             let windowInnerHeight=window.innerHeight;   
@@ -64,6 +96,7 @@ import { ApiCallService } from "../services/api-call.service";
                 let img=<HTMLElement>imgTags.item(i);
                 if(img.getBoundingClientRect().top<(windowInnerHeight+windowScrollPosition))
                 {
+                    console.log('Each image',img.attributes.getNamedItem('data-src').value,img.getBoundingClientRect().top);
                     img.setAttribute('src',img.attributes.getNamedItem('data-src').value);
                     img.classList.remove('lazyLoad');
                 }
@@ -82,15 +115,15 @@ import { ApiCallService } from "../services/api-call.service";
         {
             if(event.target.localName=="button")
             {
-                let selectedYear=Number(event.target.name);
-                if(this.filterLaunchYear==selectedYear)
+                let selectedYear=event.target.name;
+                if(this.filters.launch_year==selectedYear)
                 {
                     //CLicked again
-                    this.filterLaunchYear=null;
+                    this.filters.launch_year='';
                 }
                 else
                 {
-                    this.filterLaunchYear=selectedYear;
+                    this.filters.launch_year=selectedYear;
                 }
             }
             this.getLaunchItems();
@@ -99,14 +132,15 @@ import { ApiCallService } from "../services/api-call.service";
         setSuccessLaunchFilter(value)
         {
             console.log(value);
-            if(this.filterSuccessfulLaunch==Boolean(value))
+            if(this.filters.launch_success===value)
             {
                 //Checked already
-                this.filterSuccessfulLaunch=null;
+                this.filters.launch_success='';
             }
             else
             {
-                this.filterSuccessfulLaunch=Boolean(value)
+                this.filters.launch_success=value;
+
             }
             this.getLaunchItems();
         }
@@ -114,30 +148,35 @@ import { ApiCallService } from "../services/api-call.service";
         setSuccessLandingFilter(value)
         {
             console.log(value);
-            if(this.filterSuccessfulLanding==Boolean(value))
+            if(this.filters.land_success===value)
             {
                 //Checked already
-                this.filterSuccessfulLanding=null;
+                this.filters.land_success='';
             }
             else
             {
-                this.filterSuccessfulLanding=Boolean(value)
+                this.filters.land_success=value;
             }
             this.getLaunchItems();
         }
 
         getLaunchItems()
         {
-            let params=
-            {
-                limit:100,
-                launch_success:this.filterSuccessfulLaunch??'',
-                land_success:this.filterSuccessfulLanding??'',
-                launch_year:this.filterLaunchYear??''
-            }
-            this.apiService.getLaunches(params).subscribe(data=>
+            let queryParams='';
+            Object.keys(this.filters).forEach(filter=>
+                {
+                    if(this.filters[filter]!=='')
+                    {   
+                        queryParams+=filter+"="+this.filters[filter]+"&";
+                    }
+                });
+            queryParams=queryParams.charAt(queryParams.length-1)=='&'?queryParams.substring(0,queryParams.length-1):queryParams;
+            this.location.go('',queryParams); //For changing the query params of current page
+
+            this.apiService.getLaunches(this.filters).subscribe((data:any)=>
                 {
                     console.log(data);
+                    this.launchItems=data;
                 },error=>
                 {
                     console.log(error);

@@ -3,8 +3,8 @@
     font-size: 14px;
     --text_1:1rem;
     --text_sm:0.8rem;
-    --text_md:1.1rem;
-    --text_lg:1.2rem;
+    --text_md:1.2rem;
+    --text_lg:2rem;
 
     --textColor:black;
     --primaryColor:rgb(197, 224, 157);
@@ -17,12 +17,15 @@
 
 
 /*U.I. Components*/
-
+html,body
+{
+    height:100%;
+}
 body
 {
-    background-color: var(--backgroundColor);
+    background-color: white;
     margin:0px;
-    padding:5px 20px;
+    padding:0px 20px;
 }
 
 button
@@ -55,4 +58,9 @@ h5
 h2
 {
     font-size: var(--text_lg);
+}
+
+.errorMessage
+{
+    color:rgb(233, 103, 103);
 }

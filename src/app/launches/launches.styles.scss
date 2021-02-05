@@ -4,8 +4,11 @@ $commonSeperationUnits:20px; //For comon gaps, margin and padding of sections
 .container
 {
     max-width: 1440px;
+    background-color: var(--backgroundColor);
     margin-left: auto;
     margin-right: auto;
+    height:100%;
+    padding: $commonSeperationUnits;
 }
 
 /* content Container*/
@@ -14,6 +17,11 @@ $commonSeperationUnits:20px; //For comon gaps, margin and padding of sections
     display: grid;
     gap: $commonSeperationUnits;
     justify-items: stretch;
+}
+
+.pageTitle
+{
+    margin-top:0px;
 }
 
 h5
@@ -27,9 +35,10 @@ h5
 {
     padding: $commonSeperationUnits;
     background-color: white;
-    max-width: 320px;
-    min-width: 240px;
-    min-height: 480px;
+    min-width: 200px;;
+    min-height: 400px;
+    box-shadow: 1px 2px 5px #afafaf;
+    border-radius: 10px;
 }
 
 /*Filters*/
@@ -122,11 +131,28 @@ h5
 
 }
 
+/*Footer*/
+footer
+{
+    text-align: center;
+    font-size: var(--text_1);
+    word-break: break-word;
+    margin-top: 32px;
+    .heading
+    {
+        color:var(--textColor);  
+        font-size: var(--text_lg); 
+        font-weight: 700;   
+    }
+}
+
 
 /*Media Queries*/
 @media only screen  and (max-width:700px)
 {
+    
     //For mobile
+
     .launchItemsBody
     {
         grid-template-columns: 1fr;
@@ -154,7 +180,7 @@ h5
     //For Desktop
     .contentContainer
     {
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr 4fr;
     }
 
     .launchItemsBody
@@ -168,7 +194,7 @@ h5
     //For large screens
     .contentContainer
     {
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr 4fr;
     }
     .launchItemsBody
     {
