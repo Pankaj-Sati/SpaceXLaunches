@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { AppSettingsService } from './services/app-settings.service';
 
 @Component({
@@ -11,7 +12,10 @@ export class AppComponent {
 
   constructor(public appSettings:AppSettingsService)
   {
-
+    if(environment.production && window)
+    {
+      window.console.log=()=>{}; //Disabling console log on production
+    }
   }
 
 }
