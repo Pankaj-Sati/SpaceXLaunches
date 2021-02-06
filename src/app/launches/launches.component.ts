@@ -63,8 +63,6 @@ import { AppSettingsService } from "../services/app-settings.service";
         }
 
         ngOnInit(): void {
-            //  this.getLaunchItems();
-
             this.activatedRoute.queryParams.subscribe(data=>
                 {
                     console.log('Query Parameter changed',data);
@@ -87,8 +85,7 @@ import { AppSettingsService } from "../services/app-settings.service";
         {
             let imgTags=document.getElementsByClassName('lazyLoad');
             let windowScrollPosition=window.pageYOffset;   
-            let windowInnerHeight=window.innerHeight;   
-            console.log('Called lazyLoadImages()',windowScrollPosition,windowInnerHeight);      
+            let windowInnerHeight=window.innerHeight;        
             for(let i=0;i<imgTags.length;i++)
             {  
                 let img=<HTMLElement>imgTags.item(i);
@@ -134,7 +131,6 @@ import { AppSettingsService } from "../services/app-settings.service";
 
         setSuccessLaunchFilter(value)
         {
-            console.log(value);
             if(this.filters.launch_success===value)
             {
                 //Checked already
@@ -150,7 +146,6 @@ import { AppSettingsService } from "../services/app-settings.service";
 
         setSuccessLandingFilter(value)
         {
-            console.log(value);
             if(this.filters.land_success===value)
             {
                 //Checked already
@@ -178,7 +173,6 @@ import { AppSettingsService } from "../services/app-settings.service";
 
             this.apiService.getLaunches(this.filters).subscribe((data:any)=>
                 {
-                    console.log('Got mapped data');
                     this.launchItems=data;
                 },error=>
                 {
