@@ -27,7 +27,6 @@ export class LaunchDataResolver implements Resolve<any>
         {
             //If already our data is available, we will use it
             const data=this.stateTransfer.get(KEY,[]);
-            console.log('Data in state',data);
             this.stateTransfer.remove(KEY); //Remove the data once we have used it
             return of(data);
         }

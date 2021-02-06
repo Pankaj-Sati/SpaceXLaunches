@@ -33,7 +33,8 @@ import { AppSettingsService } from "../services/app-settings.service";
             this.isPlatformBrowser=isPlatformBrowser(platformId);
             
             //Adding static year filters
-            for(let i=2006;i<=2020;i++)
+            const currentYear=new Date().getFullYear();
+            for(let i=2006;i<=currentYear;i++)
             {
                 this.launchYears.push(i);
             }

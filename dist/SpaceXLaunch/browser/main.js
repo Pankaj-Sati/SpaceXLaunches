@@ -407,7 +407,8 @@ class LaunchesComponent {
         this.isPlatformBrowser = false;
         this.isPlatformBrowser = Object(_angular_common__WEBPACK_IMPORTED_MODULE_0__["isPlatformBrowser"])(platformId);
         //Adding static year filters
-        for (let i = 2006; i <= 2020; i++) {
+        const currentYear = new Date().getFullYear();
+        for (let i = 2006; i <= currentYear; i++) {
             this.launchYears.push(i);
         }
         this.launchItems = this.activatedRoute.snapshot.data['launchItems']; //Get the data from state 
@@ -887,7 +888,6 @@ class LaunchDataResolver {
         if (this.stateTransfer.hasKey(KEY)) {
             //If already our data is available, we will use it
             const data = this.stateTransfer.get(KEY, []);
-            console.log('Data in state', data);
             this.stateTransfer.remove(KEY); //Remove the data once we have used it
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(data);
         }
