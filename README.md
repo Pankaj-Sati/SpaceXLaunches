@@ -1,27 +1,39 @@
 # SpaceXLaunch
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+Angular application to list and browse all launches by SpaceX program.
 
-## Development server
+## Stack Details
+- Angular 10.2.4 : For designing and developing the front-end of the application
+- Node.js 14.15.0 
+- Angular Universal : For Server Side Rendering boilerplate
+- SCSS for styling
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Development Approach
 
-## Code scaffolding
+1. I started off with understanding the requirements and created an outline of different parts of the application how will they connect with each other eg. Server Side Rendering and State Transfer
+2. I integrated the boilerplate for Server Side rendering using Angular Universal that comes with Express engine.
+3. After basic testing of the express middleware, I stated creating my UI
+    - I created the components (launches and page-not-found) without using the CLI and added them to router and AppModule files
+4. For UI, I started creating the designs for mobile first
+    - I started off by expilictly setting margin and padding to 0px in html and body because browsers often add it automatically
+    - I used grid layout for creating the basic structure of the webpage
+    - Then I created designs for each data card 
+    - I used dummy space-x data for seeing how the UI looks on mobile
+5. After the UI was created for mobile, I  added media query for supporting Tablet and Desktop layouts
+6. With a responsive UI in place, I worked on changing the state of filters and updating the url once the filters are changed
+7. Then I used HTTPClient for accessing the Space-X public API with the applied filters
+8. I created HTTP Interceptor to facilitate Loading screen
+9. I added a Resolver in my main component (launches/) so that server can get the data before finishing the routing into the component
+10. To solve the problem of state management, I used TransferState provided in Browser and Server side modules by importing them in AppModule and AppServerModule respectively
+    - When Server receives a request, it fetches the Space-X data, and adds the data in TransferState API so that client does not request the same data again when Angular App finally gets bootstrapped on the browser 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Deployment
 
-## Build
+This application is deployed on Heroku Server. A Procfile is created in root directory which specifies the command to run upon successful deployment to Heroku.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Lazy Loading of Images
 
-## Running unit tests
+I have added lazy-loading of images using javascript only for avoiding excessive HTTP calls on the browser
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Lighthouse score
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

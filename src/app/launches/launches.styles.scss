@@ -31,7 +31,7 @@ h5 {
   padding: $commonSeperationUnits;
   background-color: white;
   margin: 10px;
-  width: 200px;
+  width: auto;
   min-height: 400px;
   box-shadow: 1px 2px 5px #afafaf;
   border-radius: 10px;
@@ -41,7 +41,7 @@ h5 {
 
 .filters {
   align-self: start;
-  width: 180px;
+  width: auto;
 }
 
 .filtersBody {
@@ -73,7 +73,7 @@ h5 {
 
 .launchItemsBody {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .launchitem {
@@ -116,12 +116,11 @@ h5 {
 /*Footer*/
 footer {
   text-align: center;
-  font-size: var(--text_1);
+  font-size: var(--text_lg);
   word-break: break-word;
   margin-top: 32px;
   .heading {
     color: var(--textColor);
-    font-size: var(--text_lg);
     font-weight: 700;
   }
 }
@@ -129,10 +128,6 @@ footer {
 /*Media Queries*/
 @media only screen and (max-width: 700px) {
   //For mobile
-  .filters,
-  .card {
-    width: auto;
-  }
 }
 
 @media only screen and (min-width: 700px) and (max-width: 1024px) {
@@ -154,11 +149,32 @@ footer {
   .filters {
     width: 140px;
   }
+
+  .launchItemsBody
+  {
+      flex-direction: row;
+      flex-wrap: wrap;
+  }
+
 }
 
 @media only screen and (min-width: 1024px) {
   //For Desktop
   .contentContainer {
     grid-template-columns: 1fr 5fr;
+  }
+
+  .card {
+    width: 220px;
+    padding: $commonSeperationUnits-tablet;
+  }
+
+  .filters {
+    width: 200px;
+  }
+  .launchItemsBody
+  {
+      flex-direction: row;
+      flex-wrap: wrap;
   }
 }

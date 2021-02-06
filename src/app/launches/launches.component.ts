@@ -44,19 +44,16 @@ import { AppSettingsService } from "../services/app-settings.service";
                 {
                     if(event instanceof NavigationEnd)
                     {   
-                            if(this.isPlatformBrowser)
-                            { 
-                                //Update the filters
-                                console.log('Navigation End event triggered',this.router.parseUrl(this.router.url).queryParams);
-                                const queryParams=Object.assign({},this.router.parseUrl(this.router.url).queryParams);
-                                Object.keys(queryParams).forEach(param=>
-                                    {
-                                        if(this.filters[param]!=undefined)
-                                        {
-                                            this.filters[param]=queryParams[param];
-                                        }
-                                    });
-                            } 
+                           
+                        console.log('Navigation End event triggered',this.router.parseUrl(this.router.url).queryParams);
+                        const queryParams=Object.assign({},this.router.parseUrl(this.router.url).queryParams);
+                        Object.keys(queryParams).forEach(param=>
+                            {
+                                if(this.filters[param]!=undefined)
+                                {
+                                    this.filters[param]=queryParams[param];
+                                }
+                            });
                     }
                 })
 
