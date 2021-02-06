@@ -29,11 +29,13 @@ Angular application to list and browse all launches by SpaceX program.
 
 ## Deployment
 
-This application is deployed on Heroku Server. A Procfile is created in root directory which specifies the command to run upon successful deployment to Heroku.
+- This application is deployed on Heroku Server. A Procfile is created in root directory which specifies the command to run upon successful deployment to Heroku.
 
-## Lazy Loading of Images
-
-I have added lazy-loading of images using javascript only for avoiding excessive HTTP calls on the browser
+- I have created this github repository and linked it with Heroku for contineous integration and deployment. 
+### Staging: Master branch
+Any push made to master branch will automatically deploy the app to Stating environment on Heroku. [Staging build link](https://space-x-launches-pankaj.herokuapp.com/)
+### Production: Main branch
+Any push made to main branch will automatically build and deploy the app to Production environment on Heroku. [Production build link](https://space-x-prod.herokuapp.com/)
 
 ## Lighthouse score
 

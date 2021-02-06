@@ -412,7 +412,6 @@ class LaunchesComponent {
             this.launchYears.push(i);
         }
         this.launchItems = this.activatedRoute.snapshot.data['launchItems']; //Get the data from state 
-        console.log('Data from state', this.launchItems);
         this.router.events.subscribe(event => {
             if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationEnd"]) {
                 console.log('Navigation End event triggered', this.router.parseUrl(this.router.url).queryParams);

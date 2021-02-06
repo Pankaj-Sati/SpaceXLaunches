@@ -40,7 +40,6 @@ import { AppSettingsService } from "../services/app-settings.service";
             }
 
             this.launchItems=this.activatedRoute.snapshot.data['launchItems']; //Get the data from state 
-            console.log('Data from state',this.launchItems);
             this.router.events.subscribe(event=>
                 {
                     if(event instanceof NavigationEnd)
