@@ -8,6 +8,25 @@ Angular application to list and browse all launches by SpaceX program.
 - Angular Universal : For Server Side Rendering boilerplate
 - SCSS for styling
 
+## Features
+- Lazy loading of Images
+- Mobile first design approach
+- Use for HTTP Interceptors
+- Custom Component for Loading Screen
+- DRY principle applied
+- SEO added
+- Added services for API calling and basic utilities
+
+## Screenshots
+### Desktop View
+![Desktop view](./screenshots/desktop_ui.png)
+
+### Tablet View
+![Desktop view](./screenshots/tablet_ui.png)
+
+### Mobile View
+![Desktop view](./screenshots/mobile_ui.png)
+
 ## Development Approach
 
 1. I started off with understanding the requirements and created an outline of different parts of the application how will they connect with each other eg. Server Side Rendering and State Transfer
@@ -30,7 +49,6 @@ Angular application to list and browse all launches by SpaceX program.
     - When Server receives a request, it fetches the Space-X data, and adds the data in TransferState API so that client does not request the same data again when Angular App finally gets bootstrapped on the browser 
 
 ## Deployment
-
 - This application is deployed on Heroku Server. A Procfile is created in root directory which specifies the command to run upon successful deployment to Heroku.
 
 - I have created this github repository and linked it with Heroku for contineous integration and deployment. 
@@ -41,13 +59,3 @@ Any push made to main branch will automatically build and deploy the app to Prod
 
 ## Lighthouse score
 ![Lighthouse score image](./screenshots/lighthouse_score.png)
-
-## Screenshots
-### Desktop View
-![Desktop view](./screenshots/desktop_ui.png)
-
-### Tablet View
-![Desktop view](./screenshots/tablet_ui.png)
-
-### Mobile View
-![Desktop view](./screenshots/mobile_ui.png)
