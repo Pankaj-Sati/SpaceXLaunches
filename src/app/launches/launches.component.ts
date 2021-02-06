@@ -94,8 +94,11 @@ import { AppSettingsService } from "../services/app-settings.service";
                 let img=<HTMLElement>imgTags.item(i);
                 if(img.getBoundingClientRect().top<(windowInnerHeight+windowScrollPosition))
                 {
-                    console.log('Each image',img.attributes.getNamedItem('data-src').value,img.getBoundingClientRect().top);
-                    img.setAttribute('src',img.attributes.getNamedItem('data-src').value);
+                    if(img.attributes.getNamedItem('data-src').value)
+                    {
+                        img.setAttribute('src',img.attributes.getNamedItem('data-src').value);
+                    }
+                 
                     img.classList.remove('lazyLoad');
                 }
             }
