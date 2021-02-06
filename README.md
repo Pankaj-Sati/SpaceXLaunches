@@ -12,10 +12,12 @@ Angular application to list and browse all launches by SpaceX program.
 
 1. I started off with understanding the requirements and created an outline of different parts of the application how will they connect with each other eg. Server Side Rendering and State Transfer
 2. I integrated the boilerplate for Server Side rendering using Angular Universal that comes with Express engine.
+### UI
 3. After basic testing of the express middleware, I stated creating my UI
+    - I added root css variables and defined font sizes and primary/secondary colors that I used in the other components in Style.scss
+    - I expilictly set margin and padding to 0px in html and body because browsers often add it automatically
+4. I started creating the designs for mobile first
     - I created the components (launches and page-not-found) without using the CLI and added them to router and AppModule files
-4. For UI, I started creating the designs for mobile first
-    - I started off by expilictly setting margin and padding to 0px in html and body because browsers often add it automatically
     - I used grid layout for creating the basic structure of the webpage
     - Then I created designs for each data card 
     - I used dummy space-x data for seeing how the UI looks on mobile
