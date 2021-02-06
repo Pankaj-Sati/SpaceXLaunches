@@ -40,4 +40,8 @@ Any push made to master branch will automatically deploy the app to Stating envi
 Any push made to main branch will automatically build and deploy the app to Production environment on Heroku. [Production build link](https://space-x-prod.herokuapp.com/)
 
 ## Lighthouse score
+(./screenshots/lighthouse_score.png)
 
+## Screenshots
+### Desktop View
+(./screenshots/desktop_ui.png)
