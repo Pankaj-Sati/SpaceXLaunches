@@ -25,7 +25,7 @@ export function app(): express.Express {
 
   // Example Express Rest API endpoints
   server.get('/api/**', (req, res) => {
-    // res.status(404).send("API calling not supported");
+   console.log('In call api');
     const axios = require('axios');
     const API_ENDPOINT='https://api.spaceXdata.com/v3/launches?limit=100';
 

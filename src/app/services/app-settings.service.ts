@@ -1,15 +1,25 @@
-import { Injectable } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 
 @Injectable({
     providedIn:'root'
 })
 export class AppSettingsService
 {
-    private isLoader=true; //For displaying and hiding the loader
+    private isLoader=false; //For displaying and hiding the loader
+    private isPlatformBrowser=false;
+    constructor(@Inject(PLATFORM_ID) platformId:string)
+    {
+        this.isPlatformBrowser=isPlatformBrowser(platformId);
+    }
 
     public showLoader()
     {
-        this.isLoader=true;
+        if(this.isPlatformBrowser)
+        {
+            this.isLoader=true;
+        }
+
     }
 
     public get isLoaderDisplaying():boolean
@@ -18,7 +28,7 @@ export class AppSettingsService
     }
 
     public hideLoader()
-    {
+    { 
         this.isLoader=false;
     }
 }

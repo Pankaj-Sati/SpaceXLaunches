@@ -45,7 +45,6 @@ export class ResponseInterceptor implements HttpInterceptor
 
             map((event:HttpEvent<any>)=>
                 {
-                    console.log('Interceptor Running',event);
                     if(event instanceof HttpResponse)
                     {
                         //Response
@@ -55,14 +54,14 @@ export class ResponseInterceptor implements HttpInterceptor
                             this.appSettings.hideLoader();
                             this.count=0; //Reset the counter
                         }
-                        console.log('Intercepting response',this.count,this.appSettings.isLoaderDisplaying);
+                       
                     }
                     else
                     {
                         //Request
                         this.count++;
                         this.appSettings.showLoader();
-                        console.log('Intercepting new request',this.count,this.appSettings.isLoaderDisplaying);
+                      
                     }
                     return event;
                 })

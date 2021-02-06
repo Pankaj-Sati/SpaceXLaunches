@@ -38,14 +38,15 @@ import { AppSettingsService } from "../services/app-settings.service";
                 this.launchYears.push(i);
             }
 
+            this.launchItems=this.activatedRoute.snapshot.data['launchItems']; //Get the data from state 
+            console.log('Data from state',this.launchItems);
             this.router.events.subscribe(event=>
                 {
                     if(event instanceof NavigationEnd)
-                    {
-                        
-
+                    {   
                             if(this.isPlatformBrowser)
-                            {
+                            { 
+                                //Update the filters
                                 console.log('Navigation End event triggered',this.router.parseUrl(this.router.url).queryParams);
                                 const queryParams=Object.assign({},this.router.parseUrl(this.router.url).queryParams);
                                 Object.keys(queryParams).forEach(param=>
@@ -55,9 +56,7 @@ import { AppSettingsService } from "../services/app-settings.service";
                                             this.filters[param]=queryParams[param];
                                         }
                                     });
-                                this.getLaunchItems();
-                            }
-                        
+                            } 
                     }
                 })
 
@@ -86,7 +85,6 @@ import { AppSettingsService } from "../services/app-settings.service";
 
         lazyLoadImages()
         {
-           debugger
             let imgTags=document.getElementsByClassName('lazyLoad');
             let windowScrollPosition=window.pageYOffset;   
             let windowInnerHeight=window.innerHeight;   
@@ -111,6 +109,7 @@ import { AppSettingsService } from "../services/app-settings.service";
 
         }
 
+        //Event Bubbling implemented
         setYearFilter(event)
         {
             if(event.target.localName=="button")
@@ -176,7 +175,7 @@ import { AppSettingsService } from "../services/app-settings.service";
 
             this.apiService.getLaunches(this.filters).subscribe((data:any)=>
                 {
-                    console.log(data);
+                    console.log('Got mapped data');
                     this.launchItems=data;
                 },error=>
                 {
