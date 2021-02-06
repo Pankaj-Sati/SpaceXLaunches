@@ -45,3 +45,9 @@ Any push made to main branch will automatically build and deploy the app to Prod
 ## Screenshots
 ### Desktop View
 ![Desktop view](./screenshots/desktop_ui.png)
+
+### Tablet View
+![Desktop view](./screenshots/tablet_ui.png)
+
+### Mobile View
+![Desktop view](./screenshots/mobile_ui.png)
